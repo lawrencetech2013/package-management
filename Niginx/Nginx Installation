@@ -26,33 +26,29 @@ sudo vi /etc/nginx/nginx.conf Add the below lines
 
 http://174.129.143.37/myapp/
 #Our Custom Nginx Configuration
+==================================================================================
 events {
 worker_connections 1024;
 }
-I
-http keepalive_timeout 5; upstream tomcatServers {
+http { keepalive_timeout 5; upstream tomcatServers {
 keepalive 50;
-server
-172.31.80.125:8080;
-server
-172.31.84.29:8080;
-}
+server 172.31.80.125:8080;
+server 172.31.84.29:8080;
 server 172.31.84.249:8080 down;
+}
 server {
 listen 80;
 location / {
-}
-}
-proxy_set_header X-Real-LP $remote_addr; proxy_set_header X-Forwarded-For
+proxy_set_header X-Real-LP $remote_addr;
+proxy_set_header X-Forwarded-For
 $proxy_add_x_forwarded_for;
 proxy_set_header X-Forwarded-Proto $scheme;
-proxy_set_header
-Host $host;
+proxy_set_header Host $host;
 proxy_pass http://tomcatServers;
 }
 }
 }
-
+=============================================================================================
 
 
 Node for upgrade/patching:
