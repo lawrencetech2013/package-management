@@ -74,11 +74,11 @@ sudo systemctl restart nginx
 
 Note: If you get 502 Bad Gateway
 
-Security Ehanced Linux (SELinux) is a Linux kernel security module for Linux systems taht allows administrators to have more control over who can access the system. If SELinux enabled, which blocked NginX from making outbound connections.
+Security Ehanced Linux (SELinux) is a Linux kernel security module for Linux systems that allows administrators to have more control over who can access the system. If SELinux enabled, which blocked NginX from making outbound connections.
 
 If SELinux is on and you're experiencing this, you might try setting httpd_can_network_connect to true, and then restarting nginx:
 
-#setsebool -p httpd_can_network_connect true
+setsebool -P httpd_can_network_connect true
 
 choosing a Load-Balancing Method
 
